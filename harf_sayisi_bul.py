@@ -1,22 +1,70 @@
-def harf_sayisi_bul(dosya_adi):
-    toplam=0
-    harf=[]
-    sayi=[]
+import string
 
-    with open (dosya_adi,"r+") as dosya:
+class Istatistik:
+    def __init__(self, dosya_adi):
+        self.dosya_adi = dosya_adi
 
-        icerik=dosya.read()
-        yeni_icerik="".join(icerik.split()) #metindeki boşlukları siler
+    def noktalama_sil(self, metin):
+        noktalama_isaretleri = string.punctuation
+        temiz_metin = ""
+        for karakter in metin:
+            if karakter not in noktalama_isaretleri:
+                temiz_metin += karakter
+        return temiz_metin
 
-        for i in(yeni_icerik):
+    def bosluk_sil(self, metin):
+        return "".join(metin.split())
+    
+    def bosluklara_ayir(self, metin):
+        return metin.split()
 
-            if not (i in harf): #
-                harf.append(i) #eğer harf lsitesinde i yoksa eklenir
-                sayi.append(1) #eğer sayı listesinde i yoksa 1 olur
-            else:
-                sayi[harf.index(i)]=sayi[harf.index(i)]+1 #eğer girilen metinde i indexteki harften bir tane daha varsa sayı 1 artar
-        
-        for j in range(len(harf)): #harf sayısını hesaplar
-            toplam+=sayi[j]
+
+    def harf_sayisi_bul(self):
+        toplam = 0
+        harf = []
+        sayi = []
+
+        with open(self.dosya_adi, "r+") as dosya:
+            icerik = dosya.read()
+            yeni_icerik = self.noktalama_sil(icerik)
+            yeni_icerik2 = self.bosluk_sil(yeni_icerik)
+
+            for i in yeni_icerik2:
+                if i not in harf:
+                    harf.append(i)
+                    sayi.append(1)
+                else:
+                    sayi[harf.index(i)] += 1
             
-        print("Dosyadaki toplam harf sayısı-->",toplam)
+            for j in range(len(harf)):
+                toplam += sayi[j]
+                
+        print("Dosyadaki toplam harf sayısı -->", toplam)
+
+
+    def kelime_sayisi_bul(self):
+        with open(self.dosya_adi, "r+") as dosya:
+            icerik = dosya.read()
+            kelimeler = self.bosluklara_ayir(icerik)
+            toplam = len(kelimeler)
+            print("Girilen dosyadaki toplam kelime sayısı-->", toplam)
+
+
+    def etkisiz_kelime_sayisi(self):
+        etkisiz_kelimeler = ["ve", "veya", "ama", "ancak", "şu", "bu", "bir", "şey", "olarak", "olduğunu", "gibi", "ise", "ile", "o", "ki", "ile", "ile", "değil", "ise", "hepsi", "şöyle", "böyle", "şimdilik", "şöylelikle", "böylelikle", "zira", "çünkü", "şayet", "eğer", "her", "hep", "sadece", "yalnızca", "sanki", "mış", "miş", "muş", "müş", "diye", "oldu", "olduğu", "de", "da", "ile", "üzerinde", "altında", "içinde", "ardından", "sonra", "şimdi"]
+        toplam = 0
+
+        with open(self.dosya_adi, "r+") as dosya:
+            icerik = dosya.read()
+            yeni_icerik = self.bosluklara_ayir(self.noktalama_sil(icerik))
+
+            for kelime in yeni_icerik:
+                if kelime in etkisiz_kelimeler:
+                    toplam += 1
+
+            for j in etkisiz_kelimeler:
+                if yeni_icerik.count(j) > 1:
+                    toplam += 1
+
+        print("Girilen dosyadaki etkisiz kelime sayısı-->", toplam)
+
