@@ -68,10 +68,23 @@ class Istatistik:
 
         print("Girilen dosyadaki etkisiz kelime sayısı-->", toplam)
 
+   @staticmethod
+    def hizli_sirala(liste):
+        if len(liste) <= 1:
+            return liste
+
+        pivot = liste[len(liste) // 2]
+        küçükler = [x for x in liste if x < pivot]
+        orta = [x for x in liste if x == pivot]
+        büyükler = [x for x in liste if x > pivot]
+
+        return Istatistik.hizli_sirala(küçükler) + orta + Istatistik.hizli_sirala(büyükler)
+    
+
     def kelime_kullanim_sayilari(self):
         kelime_sayilari = {}
 
-        with open(self.dosya_adi, "r+",encoding="utf-8") as dosya:
+        with open(self.dosya_adi, "r+", encoding="utf-8") as dosya:
             icerik = dosya.read()
             kelimeler = self.bosluklara_ayir(icerik)
 
@@ -81,13 +94,13 @@ class Istatistik:
                 else:
                     kelime_sayilari[kelime] += 1
 
-        sorted_kelimeler = sorted(kelime_sayilari.items(), key=lambda x: x[1], reverse=True)
+        siralanmis_kelimeler = self.hizli_sirala(list(kelime_sayilari.items()))
 
         print("\nEn çok kullanılan ilk 5 kelime:")
-        for kelime, sayi in sorted_kelimeler[:5]:
+        for kelime, sayi in siralanmis_kelimeler[-5:]:
             print(f"{kelime}: {sayi}")
 
         print("\nEn az kullanılan ilk 5 kelime:")
-        for kelime, sayi in sorted_kelimeler[-5:]:
+        for kelime, sayi in siralanmis_kelimeler[:5]:
             print(f"{kelime}: {sayi}")
 
