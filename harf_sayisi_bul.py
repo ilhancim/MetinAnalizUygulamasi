@@ -68,3 +68,26 @@ class Istatistik:
 
         print("Girilen dosyadaki etkisiz kelime sayısı-->", toplam)
 
+    def kelime_kullanim_sayilari(self):
+        kelime_sayilari = {}
+
+        with open(self.dosya_adi, "r+",encoding="utf-8") as dosya:
+            icerik = dosya.read()
+            kelimeler = self.bosluklara_ayir(icerik)
+
+            for kelime in kelimeler:
+                if kelime not in kelime_sayilari:
+                    kelime_sayilari[kelime] = 1
+                else:
+                    kelime_sayilari[kelime] += 1
+
+        sorted_kelimeler = sorted(kelime_sayilari.items(), key=lambda x: x[1], reverse=True)
+
+        print("\nEn çok kullanılan ilk 5 kelime:")
+        for kelime, sayi in sorted_kelimeler[:5]:
+            print(f"{kelime}: {sayi}")
+
+        print("\nEn az kullanılan ilk 5 kelime:")
+        for kelime, sayi in sorted_kelimeler[-5:]:
+            print(f"{kelime}: {sayi}")
+
