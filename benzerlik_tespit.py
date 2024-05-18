@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity #benzerlik hesabı icin gerekli kütüphaneler
 def dosya_oku():
-    with open("dosyaAdi1","r") as dosya:
+    with open("dosyaAdi1.txt","r") as dosya:
         icerik=dosya.read()
     with open("dosyaAdi2.txt","r") as dosya:
         icerik1=dosya.read()
@@ -10,7 +10,7 @@ def dosya_oku():
         icerik2=dosya.read()    
     return icerik , icerik1 , icerik2
 def menu_benzerlik():
-    x=input("\nkarsilastirmak istediginiz metinleri secin\n\nmetin1 icin 1'i\nmetin2 icin 2'i\n metin3 icin 3'u tuslayin\n\nilk dosyayi seçin tercih:")
+    x=input("\nkarsilastirmak istediginiz metinleri secin\n\nmetin1 icin 1'i\nmetin2 icin 2'i\nmetin3 icin 3'u tuslayin\n\nilk dosyayi seçin tercih:")
     y=input("2. dosyayi secin tercih:")
     return x,y
 class Benzerlik():
