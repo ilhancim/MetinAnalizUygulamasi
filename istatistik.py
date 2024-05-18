@@ -18,7 +18,7 @@ class Istatistik:
         harf = []
         sayi = []
 
-        with open(self.dosya_adi, "r+", encoding="utf-8") as dosya:
+        with open(self.dosya_adi, "r", encoding="utf-8") as dosya:
             icerik = dosya.read()
             yeni_icerik = self.noktalama_sil(icerik)
             yeni_icerik2 = self.bosluk_sil(yeni_icerik)
@@ -36,7 +36,7 @@ class Istatistik:
         print("Dosyadaki toplam harf sayısı -->", toplam)
 
     def kelime_sayisi_bul(self):
-        with open(self.dosya_adi, "r+", encoding="utf-8") as dosya:
+        with open(self.dosya_adi, "r", encoding="utf-8") as dosya:
             icerik = dosya.read()
             kelimeler = self.bosluklara_ayir(icerik)
             toplam = len(kelimeler)
@@ -46,7 +46,7 @@ class Istatistik:
         etkisiz_kelimeler = ["ve", "veya", "ama", "ancak", "şu", "bu", "bir", "şey", "olarak", "olduğunu", "gibi", "ise", "ile", "o", "ki", "değil", "hepsi", "şöyle", "böyle", "şimdilik", "şöylelikle", "böylelikle", "zira", "çünkü", "şayet", "eğer", "her", "hep", "sadece", "yalnızca", "sanki", "mış", "miş", "muş", "müş", "diye", "oldu", "olduğu", "de", "da", "üzerinde", "altında", "içinde", "ardından", "sonra", "şimdi"]
         toplam = 0
 
-        with open(self.dosya_adi, "r+", encoding="utf-8") as dosya:
+        with open(self.dosya_adi, "r", encoding="utf-8") as dosya:
             icerik = dosya.read()
             yeni_icerik = self.bosluklara_ayir(self.noktalama_sil(icerik))
 
@@ -94,8 +94,11 @@ class Istatistik:
         for kelime, sayi in siralanmis_kelimeler[:5]:
             print(f"{kelime}: {sayi}")
 
+# Kullanıcıdan dosya adını al
+dosya_adi = input("Lütfen analiz etmek istediğiniz dosyanın adını uzantısıyla birlikte girin: ")
+
 # Örnek kullanım
-istatistik = Istatistik("deneme.txt")
+istatistik = Istatistik(dosya_adi)
 istatistik.harf_sayisi_bul()
 istatistik.kelime_sayisi_bul()
 istatistik.etkisiz_kelime_sayisi()
