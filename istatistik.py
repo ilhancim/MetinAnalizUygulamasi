@@ -4,7 +4,7 @@ class Istatistik:
 
     def __init__(self, dosya_adi):
         self.dosya_adi = dosya_adi
-
+        self.etkisiz_kelimeler = ["ve", "veya", "ama", "ancak", "şu", "bu", "bir", "şey", "olarak", "olduğunu", "gibi", "ise", "ile", "o", "ki", "değil", "hepsi", "şöyle", "böyle", "şimdilik", "şöylelikle", "böylelikle", "zira", "çünkü", "şayet", "eğer", "her", "hep", "sadece", "yalnızca", "sanki", "mış", "miş", "muş", "müş", "diye", "oldu", "olduğu", "de", "da", "üzerinde", "altında", "içinde", "ardından", "sonra", "şimdi"]
     def noktalama_sil(self, metin):
         noktalama_isaretleri = string.punctuation
         temiz_metin = "".join([karakter for karakter in metin if karakter not in noktalama_isaretleri])
@@ -43,7 +43,6 @@ class Istatistik:
             print("Girilen dosyadaki toplam kelime sayısı -->", toplam)
 
     def etkisiz_kelime_sayisi(self):
-        etkisiz_kelimeler = ["ve", "veya", "ama", "ancak", "şu", "bu", "bir", "şey", "olarak", "olduğunu", "gibi", "ise", "ile", "o", "ki", "değil", "hepsi", "şöyle", "böyle", "şimdilik", "şöylelikle", "böylelikle", "zira", "çünkü", "şayet", "eğer", "her", "hep", "sadece", "yalnızca", "sanki", "mış", "miş", "muş", "müş", "diye", "oldu", "olduğu", "de", "da", "üzerinde", "altında", "içinde", "ardından", "sonra", "şimdi"]
         toplam = 0
 
         with open(self.dosya_adi, "r", encoding="utf-8") as dosya:
@@ -51,7 +50,7 @@ class Istatistik:
             yeni_icerik = self.bosluklara_ayir(self.noktalama_sil(icerik))
 
             for kelime in yeni_icerik:
-                if kelime in etkisiz_kelimeler:
+                if kelime in self.etkisiz_kelimeler:
                     toplam += 1
 
         print("Girilen dosyadaki etkisiz kelime sayısı -->", toplam)
@@ -79,13 +78,13 @@ class Istatistik:
             kelimeler = self.bosluklara_ayir(icerik)
 
             for kelime in kelimeler:
-                if kelime not in kelime_sayilari:
-                    kelime_sayilari[kelime] = 1
-                else:
-                    kelime_sayilari[kelime] += 1
+                if kelime not in self.etkisiz_kelimeler:
+                    if kelime not in kelime_sayilari:
+                        kelime_sayilari[kelime] = 1
+                    else:
+                        kelime_sayilari[kelime] += 1
 
         siralanmis_kelimeler = self.hizli_sirala(list(kelime_sayilari.items()))
-
         print("\nEn az kullanılan ilk 5 kelime:")
         for kelime, sayi in siralanmis_kelimeler[-5:]:
             print(f"{kelime}: {sayi}")
