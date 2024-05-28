@@ -1,7 +1,7 @@
+from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import *
 import panel
 import panel1
-import panel1_1
 import panel1_2
 import panel1_3
 import panel2
@@ -9,11 +9,11 @@ import panel2_1
 import panel2_2
 import panel2_3
 import panel2_4
-import benzerlik_tespit
-import istatistik
-import aramaveFiltreleme
-import veriTabani
-
+from yeniPanel import panel1_1
+import veriTabani as veriTabani
+import yeniPanel.benzerlik_tespit as benzerlik_tespit
+import yeniPanel.istatistik as istatistik
+import yeniPanel.aramaveFiltreleme as aramaveFiltreleme
 
 class Panel(QMainWindow):
     def __init__(self):
@@ -71,6 +71,27 @@ class Panel1_1(QMainWindow):
         self.p1_1.pushButtonG.clicked.connect(self.geriDon)
         self.p1_1.pushButton.clicked.connect(self.Benzerlik)
 
+        self.listele()
+
+    def listele(self):
+        try:
+            dosyalar = veriTabani.veri_tabani_goster()
+
+            # Model oluşturun
+            model = QStandardItemModel()
+
+            # ListView'e dosya adlarını ekleyin
+            for dosya in dosyalar:
+                item = QStandardItem(dosya)
+                model.appendRow(item)
+
+            # ListView modelini ayarlayın
+            self.p1_1.listView.setModel(model)
+
+        except Exception as e:
+            print(f"Hata: {e}")
+            QMessageBox.critical(self, "Hata", f"Dosya isimlerini yüklerken bir hata oluştu: {str(e)}")
+
     def geriDon(self):
         self.close()
         self.p1 = Panel1()
@@ -101,6 +122,27 @@ class Panel1_2(QMainWindow):
         self.p1_2.pushButtonG.clicked.connect(self.geriDon)
         self.p1_2.pushButton.clicked.connect(self.istatistik)
 
+        self.listele()
+
+    def listele(self):
+        try:
+            dosyalar = veriTabani.veri_tabani_goster()
+
+            # Model oluşturun
+            model = QStandardItemModel()
+
+            # ListView'e dosya adlarını ekleyin
+            for dosya in dosyalar:
+                item = QStandardItem(dosya)
+                model.appendRow(item)
+
+            # ListView modelini ayarlayın
+            self.p1_2.listView.setModel(model)
+
+        except Exception as e:
+            print(f"Hata: {e}")
+            QMessageBox.critical(self, "Hata", f"Dosya isimlerini yüklerken bir hata oluştu: {str(e)}")
+
     def geriDon(self):
         self.close()
         self.p1 = Panel1()
@@ -127,6 +169,27 @@ class Panel1_3(QMainWindow):
         self.p1_3.setupUi(self)
         self.p1_3.pushButtonG.clicked.connect(self.geriDon)
         self.p1_3.pushButton.clicked.connect(self.arama)
+
+        self.listele()
+
+    def listele(self):
+        try:
+            dosyalar = veriTabani.veri_tabani_goster()
+
+            # Model oluşturun
+            model = QStandardItemModel()
+
+            # ListView'e dosya adlarını ekleyin
+            for dosya in dosyalar:
+                item = QStandardItem(dosya)
+                model.appendRow(item)
+
+            # ListView modelini ayarlayın
+            self.p1_3.listView.setModel(model)
+
+        except Exception as e:
+            print(f"Hata: {e}")
+            QMessageBox.critical(self, "Hata", f"Dosya isimlerini yüklerken bir hata oluştu: {str(e)}")
 
     def geriDon(self):
         self.close()
@@ -190,34 +253,38 @@ class Panel2_1(QMainWindow):
         self.p2_1 = panel2_1.Ui_MainWindow()
         self.p2_1.setupUi(self)
         self.p2_1.pushButtonG.clicked.connect(self.geriDon)
-        self.p2_1.pushButton.clicked.connect(self.ekle)
 
     def geriDon(self):
         self.close()
         self.p2 = Panel2()
         self.p2.show()
-
-    def ekle(self):
-        try:
-            self.dosyaAdi = self.p2_1.lineEdit.text()
-            self.metin = self.p2_1.lineEdit_2.text()
-            veriTabani.klasore_ekle(self.dosyaAdi,self.metin)
-            msg = QMessageBox()
-            msg.setWindowTitle('Ekleme')
-            msg.setText("Dosya basarili bir sekilde eklendi.")
-            msg.setStandardButtons(QMessageBox.Ok)
-            # Mesaj kutusunu göster
-            msg.exec_()
-
-        except Exception as e:
-            print("Hata oluştu:", e)
-
 class Panel2_2(QMainWindow):
     def __init__(self):
         super().__init__()
         self.p2_2 = panel2_2.Ui_MainWindow()
         self.p2_2.setupUi(self)
         self.p2_2.pushButtonG.clicked.connect(self.geriDon)
+
+        self.listele()
+
+    def listele(self):
+        try:
+            dosyalar = veriTabani.veri_tabani_goster()
+
+            # Model oluşturun
+            model = QStandardItemModel()
+
+            # ListView'e dosya adlarını ekleyin
+            for dosya in dosyalar:
+                item = QStandardItem(dosya)
+                model.appendRow(item)
+
+            # ListView modelini ayarlayın
+            self.p2_2.listView.setModel(model)
+
+        except Exception as e:
+            print(f"Hata: {e}")
+            QMessageBox.critical(self, "Hata", f"Dosya isimlerini yüklerken bir hata oluştu: {str(e)}")
 
     def geriDon(self):
         self.close()
@@ -229,52 +296,64 @@ class Panel2_3(QMainWindow):
         self.p2_3 = panel2_3.Ui_MainWindow()
         self.p2_3.setupUi(self)
         self.p2_3.pushButtonG.clicked.connect(self.geriDon)
-        self.p2_3.pushButton.clicked.connect(self.sil)
+
+        self.listele()
+
+    def listele(self):
+        try:
+            dosyalar = veriTabani.veri_tabani_goster()
+
+            # Model oluşturun
+            model = QStandardItemModel()
+
+            # ListView'e dosya adlarını ekleyin
+            for dosya in dosyalar:
+                item = QStandardItem(dosya)
+                model.appendRow(item)
+
+            # ListView modelini ayarlayın
+            self.p2_3.listView.setModel(model)
+
+        except Exception as e:
+            print(f"Hata: {e}")
+            QMessageBox.critical(self, "Hata", f"Dosya isimlerini yüklerken bir hata oluştu: {str(e)}")
+
     def geriDon(self):
         self.close()
         self.p2 = Panel2()
         self.p2.show()
-
-    def sil(self):
-        try:
-            self.dosyaNumarasi = self.p2_3.lineEdit.text()
-            veriTabani.dosya_sil(self.dosyaNumarasi)
-            msg = QMessageBox()
-            msg.setWindowTitle('Silme')
-            msg.setText("Dosya basarili bir sekilde silindi.")
-            msg.setStandardButtons(QMessageBox.Ok)
-            # Mesaj kutusunu göster
-            msg.exec_()
-
-        except Exception as e:
-            print("Hata oluştu:", e)
 class Panel2_4(QMainWindow):
     def __init__(self):
         super().__init__()
         self.p2_4 = panel2_4.Ui_MainWindow()
         self.p2_4.setupUi(self)
         self.p2_4.pushButtonG.clicked.connect(self.geriDon)
-        self.p2_4.pushButton.clicked.connect(self.guncelle)
+
+        self.listele()
+
+    def listele(self):
+        try:
+            dosyalar = veriTabani.veri_tabani_goster()
+
+            # Model oluşturun
+            model = QStandardItemModel()
+
+            # ListView'e dosya adlarını ekleyin
+            for dosya in dosyalar:
+                item = QStandardItem(dosya)
+                model.appendRow(item)
+
+            # ListView modelini ayarlayın
+            self.p2_4.listView.setModel(model)
+
+        except Exception as e:
+            print(f"Hata: {e}")
+            QMessageBox.critical(self, "Hata", f"Dosya isimlerini yüklerken bir hata oluştu: {str(e)}")
 
     def geriDon(self):
         self.close()
         self.p2 = Panel2()
         self.p2.show()
-
-    def guncelle(self):
-        try:
-            self.dosyaNumarasi = self.p2_4.lineEdit.text()
-            self.metin = self.p2_4.lineEdit_2.text()
-            veriTabani.dosya_guncelle(self.dosyaNumarasi,self.metin)
-            msg = QMessageBox()
-            msg.setWindowTitle('Guncelleme')
-            msg.setText("Dosya basarili bir sekilde guncellendi.")
-            msg.setStandardButtons(QMessageBox.Ok)
-            # Mesaj kutusunu göster
-            msg.exec_()
-
-        except Exception as e:
-            print("Hata oluştu:", e)
 
 app = QApplication([])
 pencere = Panel()
