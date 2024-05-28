@@ -35,8 +35,7 @@ class Istatistik:
 
             for j in range(len(harf)):
                 toplam += sayi[j]
-        
-        print("Dosyadaki toplam harf sayısı -->", toplam)
+
         return toplam
 
     def kelime_sayisi_bul(self):
@@ -44,7 +43,6 @@ class Istatistik:
             icerik = dosya.read()
             kelimeler = self.bosluklara_ayir(icerik)
             toplam = len(kelimeler)
-            print("Girilen dosyadaki toplam kelime sayısı -->", toplam)
             return toplam
 
     def etkisiz_kelime_sayisi(self):
@@ -58,7 +56,6 @@ class Istatistik:
                 if kelime in self.etkisiz_kelimeler:
                     toplam += 1
 
-        print("Girilen dosyadaki etkisiz kelime sayısı -->", toplam)
         return toplam
 
     @staticmethod
@@ -93,35 +90,25 @@ class Istatistik:
                         kelime_sayilari[kelime] += 1
 
         siralanmis_kelimeler = self.hizli_sirala(list(kelime_sayilari.items()))
-        print("\nEn az kullanılan ilk 5 kelime:")
         for kelime, sayi in siralanmis_kelimeler[-5:]:
-            print(f"{kelime}: {sayi}")
             dosyaya_yazilacak_az_kullanilan_kelimeler[kelime]=sayi
 
-        print("\nEn çok kullanılan ilk 5 kelime:")
         for kelime, sayi in siralanmis_kelimeler[:5]:
-            print(f"{kelime}: {sayi}")
             dosyaya_yazilacak_cok_kullanilan_kelimeler[kelime]=sayi
-         
+
         return dosyaya_yazilacak_az_kullanilan_kelimeler,dosyaya_yazilacak_cok_kullanilan_kelimeler
-def calistir():
+def calistir(dosyaNumarasi1):
     calisma_dizini = os.getcwd()
 
     # Alt klasör adı
     alt_klasor_adi = "veri_tabani_klasörü"
     #kullnıcıya var olan dosyaları gösterme
-    print("bilgilerini görmek istediginiz dosyayi secin")
     veriTabani.veri_tabani_goster()
-    dosya_adi=veriTabani.dosya_sec()
+    dosya_adi= veriTabani.dosya_sec(dosyaNumarasi1)
     dosya_yolu = os.path.join(calisma_dizini, alt_klasor_adi, dosya_adi)
 
     # Örnek kullanım
     istatistik = Istatistik(dosya_yolu)
-    istatistik.harf_sayisi_bul()
-    istatistik.kelime_sayisi_bul()
-    istatistik.etkisiz_kelime_sayisi()
-    istatistik.kelime_kullanim_sayilari()
-
     harf_sayisi=istatistik.harf_sayisi_bul()
     kelime_sayisi=istatistik.kelime_sayisi_bul()
     etkisiz_kelime_sayisi=istatistik.etkisiz_kelime_sayisi()
@@ -131,3 +118,5 @@ def calistir():
 
     with open(bilgiendirme_dosya_yolu,"a",encoding="utf-8") as dosya:
         dosya.write(f"{dosya_adi} dosyasi bilgileri\nharf sayisi={harf_sayisi}\nkelime sayisi={kelime_sayisi}\netkisiz kelime sayisi={etkisiz_kelime_sayisi}\nen az kullanilan ilk 5 kelime={az_kullanilan_5_kelime}\nen cok kullanilan 5 kelime={cok_kullanilan_5_kelime}\n\n")
+
+    return (f"{dosya_adi} dosyasi bilgileri\nharf sayisi={harf_sayisi}\nkelime sayisi={kelime_sayisi}\netkisiz kelime sayisi={etkisiz_kelime_sayisi}\nen az kullanilan ilk 5 kelime={az_kullanilan_5_kelime}\nen cok kullanilan 5 kelime={cok_kullanilan_5_kelime}\n\n")
