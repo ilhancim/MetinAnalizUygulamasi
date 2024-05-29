@@ -70,10 +70,10 @@ def olc_benzerlik(dosya_tercih1,dosya_tercih2):
         dosya.write(f"{dosya_adi1}, {dosya_adi2} dosyalari arasindaki benzerlik skoru=%{skor:.0f}\n\n")
 
     if skor>80:
-        return f"sectiginiz metinlerin benzerlik skoru:%{skor:.0f} metinler yüksek oranda benzer"
+        return f"Sectiginiz metinlerin benzerlik skoru: %{skor:.0f} metinler yüksek oranda benzer"
     elif skor>50:
-        return f"sectiginiz metinlerin benzerlik skoru :%{skor:.0f} metinler benzer"
+        return f"Sectiginiz metinlerin benzerlik skoru: %{skor:.0f} metinler benzer"
     elif skor>25:
-        return f"sectiginiz metinlerin benzerlik skoru :%{skor:.0f} metinler düsük benzer"
+        return f"Sectiginiz metinlerin benzerlik skoru: %{skor:.0f} metinler düsük benzer"
     else:
-        return f"sectiginiz metinlerin benzerlik skoru:%{skor:.0f} metinler benzer degil"
+        return f"Sectiginiz metinlerin benzerlik skoru: %{skor:.0f} metinler benzer degil"
