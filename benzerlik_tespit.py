@@ -2,9 +2,9 @@ import veriTabani
 import os
 import metinIsleme
 def dosya_oku(dosyaAdi1,dosyaAdi2):
-    with open(dosyaAdi1,"r",encoding="utf-8") as dosya:
+    with open(dosyaAdi1,"r",encoding="latin-1") as dosya:
         icerik1=dosya.read()
-    with open(dosyaAdi2,"r",encoding="utf-8") as dosya:
+    with open(dosyaAdi2,"r",encoding="latin-1") as dosya:
         icerik2=dosya.read()
     return icerik1 , icerik2
 class Benzerlik():
@@ -66,7 +66,7 @@ def olc_benzerlik(dosya_tercih1,dosya_tercih2):
     dosya_adi="metin benzerlik bilgileri.txt"
     bilgiendirme_dosya_yolu = os.path.join(alt_klasor_adi, dosya_adi)
 
-    with open(bilgiendirme_dosya_yolu,"a",encoding="utf-8") as dosya:
+    with open(bilgiendirme_dosya_yolu,"a",encoding="latin-1") as dosya:
         dosya.write(f"{dosya_adi1}, {dosya_adi2} dosyalari arasindaki benzerlik skoru=%{skor:.0f}\n\n")
 
     if skor>80:
