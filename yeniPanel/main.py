@@ -14,7 +14,6 @@ import istatistik
 import aramaveFiltreleme
 import veriTabani
 
-
 class Panel(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -96,12 +95,9 @@ class Panel1_1(QMainWindow):
             msg.setWindowTitle('Benzerlik')
             msg.setText(benzerlik)
             msg.setStandardButtons(QMessageBox.Ok)
-
-            # Mesaj kutusunu göster
             msg.exec_()
         except Exception as e:
             print("Hata oluştu:", e)
-
 
 class Panel1_2(QMainWindow):
     def __init__(self):
@@ -136,7 +132,6 @@ class Panel1_2(QMainWindow):
             msg.setWindowTitle('Istatistik')
             msg.setText(bilgi)
             msg.setStandardButtons(QMessageBox.Ok)
-            # Mesaj kutusunu göster
             msg.exec_()
 
         except Exception as e:
@@ -175,7 +170,6 @@ class Panel1_3(QMainWindow):
             msg.setWindowTitle('Arama')
             msg.setText(sonuc)
             msg.setStandardButtons(QMessageBox.Ok)
-            # Mesaj kutusunu göster
             msg.exec_()
 
         except Exception as e:
@@ -239,7 +233,6 @@ class Panel2_1(QMainWindow):
             msg.setWindowTitle('Ekleme')
             msg.setText("Dosya basarili bir sekilde eklendi.")
             msg.setStandardButtons(QMessageBox.Ok)
-            # Mesaj kutusunu göster
             msg.exec_()
 
         except Exception as e:
@@ -267,6 +260,7 @@ class Panel2_2(QMainWindow):
         self.close()
         self.p2 = Panel2()
         self.p2.show()
+
 class Panel2_3(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -285,6 +279,7 @@ class Panel2_3(QMainWindow):
             self.liste_etiketi.addItem(elemanlar)
 
         self.p2_3.listView.setModel(self.liste_etiketi.model())
+
     def geriDon(self):
         self.close()
         self.p2 = Panel2()
@@ -298,11 +293,11 @@ class Panel2_3(QMainWindow):
             msg.setWindowTitle('Silme')
             msg.setText("Dosya basarili bir sekilde silindi.")
             msg.setStandardButtons(QMessageBox.Ok)
-            # Mesaj kutusunu göster
             msg.exec_()
 
         except Exception as e:
             print("Hata oluştu:", e)
+
 class Panel2_4(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -336,7 +331,6 @@ class Panel2_4(QMainWindow):
             msg.setWindowTitle('Guncelleme')
             msg.setText("Dosya başarılı bir şekilde güncellendi.")
             msg.setStandardButtons(QMessageBox.Ok)
-            # Mesaj kutusunu göster
             msg.exec_()
 
         except Exception as e:
