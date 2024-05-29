@@ -4,7 +4,7 @@ import metinIsleme
 import re
 def arama_ve_filtreleme(dosya_yolu, anahtar_kelime):
     try:
-        with open(dosya_yolu, 'r', encoding='utf-8') as dosya:
+        with open(dosya_yolu, 'r', encoding='latin-1') as dosya:
             satirlar = dosya.readlines()
             
         # Anahtar kelimeyi düzenli ifade (regex) olarak kullanarak arama yap
