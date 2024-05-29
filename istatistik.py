@@ -119,4 +119,4 @@ def calistir(dosyaNumarasi1):
     with open(bilgiendirme_dosya_yolu,"a",encoding="latin-1") as dosya:
         dosya.write(f"{dosya_adi} dosyasi bilgileri\nharf sayisi={harf_sayisi}\nkelime sayisi={kelime_sayisi}\netkisiz kelime sayisi={etkisiz_kelime_sayisi}\nen az kullanilan ilk 5 kelime={az_kullanilan_5_kelime}\nen cok kullanilan 5 kelime={cok_kullanilan_5_kelime}\n\n")
 
-    return (f"{dosya_adi} dosyasi bilgileri\nharf sayisi={harf_sayisi}\nkelime sayisi={kelime_sayisi}\netkisiz kelime sayisi={etkisiz_kelime_sayisi}\nen az kullanilan ilk 5 kelime={az_kullanilan_5_kelime}\nen cok kullanilan 5 kelime={cok_kullanilan_5_kelime}\n\n")
+    return (f"{dosya_adi} dosyasi bilgileri;\nharf sayisi={harf_sayisi}\n\nkelime sayisi={kelime_sayisi}\n\netkisiz kelime sayisi={etkisiz_kelime_sayisi}\n\nen az kullanilan ilk 5 kelime={az_kullanilan_5_kelime}\n\nen cok kullanilan 5 kelime={cok_kullanilan_5_kelime}\n\n")
