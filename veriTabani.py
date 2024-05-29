@@ -32,7 +32,7 @@ def veri_tabani_goster():
     return dosyalar
 def dosya_sec(dosya_tercih1):
     for veri1 in dosya_secenek.keys():
-        if dosya_secenek[veri1]==int(dosya_tercih1):
+        if veri1==dosya_tercih1:
             secilen_dosya=veri1
     return secilen_dosya
 def dosya_sil(dosyaNumarasi):
