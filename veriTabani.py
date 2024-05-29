@@ -18,7 +18,7 @@ def klasore_ekle(dosya_adi ,dosya_icerigi):
     dosya_yolu = os.path.join(klasor_yolu, dosya_adi)
 
     # Dosya oluşturma ve yazma işlemi
-    with open(dosya_yolu, 'w') as dosya:
+    with open(dosya_yolu, 'w',encoding="latin-1") as dosya:
         dosya.write(islenmis_dosya_icerigi)
 #Klasördeki dosyaları listeleme
 def veri_tabani_goster():
@@ -29,6 +29,7 @@ def veri_tabani_goster():
         dosya_secenek[dosya]=dosya_numarasi  #dosya adi ve numaralara göre sözlük oluştur
         dosya_numarasi+=1
     dosya_numarasi=1
+    return dosyalar
 def dosya_sec(dosya_tercih1):
     for veri1 in dosya_secenek.keys():
         if dosya_secenek[veri1]==int(dosya_tercih1):
@@ -56,7 +57,7 @@ def dosya_guncelle(dosyaNumarasi,dosyaIcerik):
         alt_klasor_adi = klasor_adi
         # Dosya yolunu birleştirerek oluşturma
         dosya_yolu = os.path.join(calisma_dizini, alt_klasor_adi, guncellenecekDosya)
-        with open(dosya_yolu,"w") as dosya:
+        with open(dosya_yolu,"w",encoding="latin-1") as dosya:
             dosya.write(dosyaIcerik)
     except:
         print("dosya ")
